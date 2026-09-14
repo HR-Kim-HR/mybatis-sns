@@ -1,0 +1,5 @@
+name: prod
+variables:
+  - name: baseUrl
+    value: http://sns.com
+    description: ""

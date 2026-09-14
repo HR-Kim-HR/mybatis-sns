@@ -1,0 +1,118 @@
+info:
+  name: 게시글 단건 상세 조회
+  type: http
+  seq: 1
+  tags:
+    - SNS 게시글 API
+
+http:
+  method: GET
+  url: "{{baseUrl}}/posts/:id"
+  params:
+    - name: id
+      value: "1"
+      type: path
+      description: 조회할 게시글 ID
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 Response
+    description: 조회 성공
+    request:
+      url: "{{baseUrl}}/api/v1/posts/:id"
+      method: GET
+      params:
+        - name: id
+          value: "1"
+          type: path
+          description: 조회할 게시글 ID
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": 1,
+            "memberId": 10,
+            "content": "스프링 부트 REST API 학습중입니다.",
+            "imageUrl": "https://example.com/images/post1.png",
+            "likeCount": 0,
+            "createdAt": "",
+            "updatedAt": ""
+          }
+  - name: 404 Response
+    description: 게시글이 존재하지 않음
+    request:
+      url: "{{baseUrl}}/api/v1/posts/:id"
+      method: GET
+      params:
+        - name: id
+          value: "1"
+          type: path
+          description: 조회할 게시글 ID
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0,
+            "timestamp": "",
+            "errors": [
+              {
+                "field": "",
+                "rejectedValue": "",
+                "reason": ""
+              }
+            ]
+          }
+  - name: 500 Response
+    description: 내부 서버 오류
+    request:
+      url: "{{baseUrl}}/api/v1/posts/:id"
+      method: GET
+      params:
+        - name: id
+          value: "1"
+          type: path
+          description: 조회할 게시글 ID
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0,
+            "timestamp": "",
+            "errors": [
+              {
+                "field": "",
+                "rejectedValue": "",
+                "reason": ""
+              }
+            ]
+          }
+
+docs: 기본 키 ID에 해당하는 게시글의 상세 정보를 조회합니다.

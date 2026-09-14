@@ -1,0 +1,11 @@
+info:
+  name: 게시글
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit
+
+docs:
+  content: 피드 게시글 등록, 조회, 수정, 삭제를 담당하는 REST 컨트롤러
+  type: text/markdown

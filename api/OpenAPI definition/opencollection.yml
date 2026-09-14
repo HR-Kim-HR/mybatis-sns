@@ -1,0 +1,33 @@
+opencollection: 1.0.0
+
+info:
+  name: OpenAPI definition Mybatis-sns
+config:
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ""
+      port: ""
+      auth:
+        username: ""
+        password: ""
+      bypassProxy: ""
+
+request:
+  auth:
+    type: bearer
+    token: "{{accessToken}}"
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git
+    openapi:
+      - sourceUrl: http://localhost:8080/v3/api-docs
+        groupBy: tags
+        lastSyncDate: 2026-09-08T05:10:22.477Z
+        specHash: 64ca6bebd68bb57745274a9aa248d78e
+        autoCheck: true
+        autoCheckInterval: 5

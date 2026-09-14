@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.likelion.bebc25.sns.mapper.PostLikeMapper">
+    <!-- 좋아요 등록-->
+    <insert id="insertLike">
+        INSERT INTO post_like (member_id, post_id)
+        VALUES (#{memberId}, #{postId})
+    </insert>
+
+    <!--좋아요 취소-->
+    <delete id="deleteLike">
+        DELETE FROM post_like
+        WHERE member_id = #{memberId} AND post_id = #{postId}
+    </delete>
+
+    <!--좋아요 등록 여부 조회-->
+    <select id="countLike" resultType="int">
+        SELECT COUNT(*)
+        FROM post_like
+        WHERE member_id = #{memberId} AND post_id = #{postId}
+    </select>
+</mapper>

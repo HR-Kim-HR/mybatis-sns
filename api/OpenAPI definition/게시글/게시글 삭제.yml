@@ -1,0 +1,160 @@
+info:
+  name: 게시글 삭제
+  type: http
+  seq: 3
+  tags:
+    - SNS 게시글 API
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/posts/:id"
+  headers:
+    - name: X-Member-Id
+      value: "1"
+      description: 작성자 회원 ID
+      disabled: true
+  params:
+    - name: id
+      value: "1"
+      type: path
+      description: 삭제할 게시글 ID
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 204 Response
+    description: 게시글 삭제 완료
+    request:
+      url: "{{baseUrl}}/api/v1/posts/:id"
+      method: DELETE
+      headers:
+        - name: X-Member-Id
+          value: "1"
+          description: 작성자 회원 ID
+      params:
+        - name: id
+          value: "1"
+          type: path
+          description: 삭제할 게시글 ID
+    response:
+      status: 204
+      statusText: No Content
+      body:
+        type: text
+        data: ""
+  - name: 403 Response
+    description: 본인 작성 게시글이 아니므로 삭제 권한 없음
+    request:
+      url: "{{baseUrl}}/api/v1/posts/:id"
+      method: DELETE
+      headers:
+        - name: X-Member-Id
+          value: "1"
+          description: 작성자 회원 ID
+      params:
+        - name: id
+          value: "1"
+          type: path
+          description: 삭제할 게시글 ID
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0,
+            "timestamp": "",
+            "errors": [
+              {
+                "field": "",
+                "rejectedValue": "",
+                "reason": ""
+              }
+            ]
+          }
+  - name: 404 Response
+    description: 삭제할 대상 게시글이 존재하지 않음
+    request:
+      url: "{{baseUrl}}/api/v1/posts/:id"
+      method: DELETE
+      headers:
+        - name: X-Member-Id
+          value: "1"
+          description: 작성자 회원 ID
+      params:
+        - name: id
+          value: "1"
+          type: path
+          description: 삭제할 게시글 ID
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0,
+            "timestamp": "",
+            "errors": [
+              {
+                "field": "",
+                "rejectedValue": "",
+                "reason": ""
+              }
+            ]
+          }
+  - name: 500 Response
+    description: 내부 서버 오류
+    request:
+      url: "{{baseUrl}}/api/v1/posts/:id"
+      method: DELETE
+      headers:
+        - name: X-Member-Id
+          value: "1"
+          description: 작성자 회원 ID
+      params:
+        - name: id
+          value: "1"
+          type: path
+          description: 삭제할 게시글 ID
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "",
+            "message": "",
+            "status": 0,
+            "timestamp": "",
+            "errors": [
+              {
+                "field": "",
+                "rejectedValue": "",
+                "reason": ""
+              }
+            ]
+          }
+
+docs: 게시글 ID를 전달받아 해당 자원을 삭제합니다.
